@@ -2,9 +2,9 @@
     <div>
         Index page
         <br>
-        <h1 v-for="(obj, index) in arrPosts" :key="index">
-            {{ obj }}
-        </h1>
+        <h3 v-for="(obj, index) in arrPosts" :key="index">
+            {{ obj.id }} {{ obj.title }} <br>
+        </h3>
     </div>
 </template>
 

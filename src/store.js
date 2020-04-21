@@ -14,18 +14,18 @@ const store = new Vuex.Store({
         loadTest({commit}) {
             console.log('aqui 2');
             axios.get(
-                    'https://jsonplaceholder.typicode.com/todos/1'
-                ).then(
-                    data => {
-                        console.log(data.data);
-                        let arrValores = data.data;
-                        commit('setArrPost', arrValores);
-                    }
-                ).catch(
-                    error => {
-                        console.log(error);
-                    }
-                )
+                'https://jsonplaceholder.typicode.com/posts'
+            ).then(
+                data => {
+                    console.log(data.data);
+                    let arrValores = data.data;
+                    commit('setArrPost', arrValores);
+                }
+            ).catch(
+                error => {
+                    console.log(error);
+                }
+            )
         }
     },
 
