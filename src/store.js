@@ -7,7 +7,9 @@ Vue.use(Vuex, axios)
 const store = new Vuex.Store({
     state : {
         count : 1,
-        arrPosts : []
+        arrPosts : [],
+        arrClientes : [],
+        sn_carregando_ajax : false
     },
 
     actions : {
@@ -26,6 +28,24 @@ const store = new Vuex.Store({
                     console.log(error);
                 }
             )
+        },
+
+        getAjaxListaClietes({commit}) {
+            commit('setSnCarregandoAjax', true);
+
+            axios.get(
+                'http://localhost:8000/api/get'
+            ).then(
+                data => {
+                    console.log(data.data);
+                    //let arrValores = data.data;
+                    commit('setSnCarregandoAjax', false);
+                }
+            ).catch(
+                error => {
+                    console.log(error);
+                }
+            )
         }
     },
 
@@ -33,8 +53,17 @@ const store = new Vuex.Store({
         setCount(state, payload) {
             state.count = payload;
         },
+
         setArrPost(state, payload) {
             state.arrPosts = payload;
+        },
+
+        setArrClientes(state, payload) {
+            state.arrClientes = payload;
+        },
+
+        setSnCarregandoAjax(state, payload) {
+            state.sn_carregando_ajax = payload;
         }
     }
 });
