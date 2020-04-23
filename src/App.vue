@@ -23,6 +23,18 @@
                     </v-list-item-action>
                     <v-list-item-content>
                         <v-list-item-title>
+                            <router-link :to="{name:'cliente-formulario'}">Form</router-link>
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+
+                <v-list-item link>
+                    <v-list-item-action>
+                        <v-icon>mdi-view-dashboard</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>
                             <router-link :to="{name:'home'}">Home</router-link>
                         </v-list-item-title>
                     </v-list-item-content>
@@ -58,9 +70,6 @@
                     justify="center"
                 >
                     <router-view></router-view>
-                    <v-col class="shrink">
-                        .
-                    </v-col>
                 </v-row>
             </v-container>
         </v-content>

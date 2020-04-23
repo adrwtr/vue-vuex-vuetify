@@ -5,16 +5,21 @@ import axios from 'axios'
 Vue.use(Vuex, axios)
 
 const store = new Vuex.Store({
+
     state : {
         count : 1,
         arrPosts : [],
         arrClientes : [],
-        sn_carregando_ajax : false
+        sn_carregando_ajax : false,
+
+        arrDadosCliente : {
+            ds_nome : "",
+            ds_teste : ""
+        }
     },
 
     actions : {
         loadTest({commit}) {
-            console.log('aqui 2');
             axios.get(
                 'https://jsonplaceholder.typicode.com/posts'
             ).then(
@@ -33,12 +38,14 @@ const store = new Vuex.Store({
         getAjaxListaClietes({commit}) {
             commit('setSnCarregandoAjax', true);
 
-            axios.get(
-                'http://localhost:8000/api/get'
+            axios.post(
+                'http://localhost:8000/api/get',
+                {
+                   'ds_chave_sql' : 'listar_clientes'
+                }
             ).then(
                 data => {
-                    console.log(data.data);
-                    //let arrValores = data.data;
+                    commit('setArrClientes', data.data);
                     commit('setSnCarregandoAjax', false);
                 }
             ).catch(
@@ -46,6 +53,34 @@ const store = new Vuex.Store({
                     console.log(error);
                 }
             )
+        },
+
+        postAjaxClientes({commit}, arrNovosDados) {
+            let objDados = {
+               'ds_entidade' : 'Application\\Entity\\Admin\\Cliente',
+               'arrCampoValor' : [
+                   {
+                     'ds_nome' : arrNovosDados.ds_nome
+                   }
+               ]
+            };
+
+            axios.post(
+                'http://localhost:8000/api/post',
+                objDados
+            ).then(
+                data => {
+
+                    console.log('tudo ok:');
+                    console.log(data.data);
+
+                    commit('setSnCarregandoAjax', false);
+                }
+            ).catch(
+                error => {
+                    console.log(error);
+                }
+            );
         }
     },
 
@@ -64,6 +99,16 @@ const store = new Vuex.Store({
 
         setSnCarregandoAjax(state, payload) {
             state.sn_carregando_ajax = payload;
+        },
+
+        setArrDadosCliente(state, payload) {
+            state.arrDadosCliente = payload;
+        }
+    },
+
+    getters: {
+        arrDadosCliente: state => {
+            return state.arrDadosCliente
         }
     }
 });
