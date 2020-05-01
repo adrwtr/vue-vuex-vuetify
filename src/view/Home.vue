@@ -1,6 +1,6 @@
 <template>
     <div class="pt-10">
-        Index page
+        Bem vindo ao novo projeto do UNICONTROLE
     </div>
 </template>
 
