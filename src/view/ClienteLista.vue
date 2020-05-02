@@ -17,11 +17,11 @@
                     </v-list-item>
 
                     <v-card-actions>
-                        <v-btn text @click="goToUrl('http://terra.com.br')">
+                        <v-btn text @click="goToUrl(obj.ds_url_portal)">
                             <v-icon>mdi-arrow-right-bold-circle-outline</v-icon>
                             &nbsp;Portal
                         </v-btn>
-                        <v-btn text @click="goToUrl('http://google.com')">
+                        <v-btn text @click="goToAdmin(obj.ds_url_portal)">
                             <v-icon>mdi-arrow-right-bold-circle-outline</v-icon>
                             &nbsp;Portal Admin
                         </v-btn>
@@ -50,6 +50,13 @@
         methods: {
             goToUrl: function(ds_url) {
                 window.open(ds_url);
+                return true;
+            },
+            goToAdmin: function(ds_url) {
+                this.goToUrl(
+                    ds_url
+                        + '/projetos/admin'
+                );
                 return true;
             }
         },
