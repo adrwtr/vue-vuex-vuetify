@@ -12,3 +12,6 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app')
+
+
+// ver exemplo Marcos https://github.com/marcosandrejorge/coup-state/blob/master/src/store/store.js
